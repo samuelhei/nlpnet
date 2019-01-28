@@ -1,6 +1,12 @@
 from setuptools import setup
 from setuptools import Extension
+from Cython.Distutils import build_ext
 
+class CustomBuildExtCommand(build_ext):
+    def run(self):
+        import numpy
+        self.include_dirs.append(numpy.get_include())
+        build_ext.run(self)
 
 def readme():
     with open('README.rst') as f:
@@ -9,6 +15,7 @@ def readme():
 
 setup(
     name='nlpnet',
+    cmdclass = {'build_ext': CustomBuildExtCommand},
     description='Neural networks for NLP tasks',
     packages=['nlpnet', 'nlpnet.pos', 'nlpnet.srl', 'nlpnet.parse'],
     ext_modules=[
