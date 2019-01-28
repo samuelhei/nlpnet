@@ -1,8 +1,8 @@
 from setuptools import setup
 from setuptools import Extension
-from Cython.Distutils import build_ext
+from distutils.cmd import Command
 
-class CustomBuildExtCommand(build_ext):
+class CustomBuildExtCommand(Command):
     def run(self):
         import numpy
         self.include_dirs.append(numpy.get_include())
