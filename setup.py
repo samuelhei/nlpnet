@@ -20,7 +20,7 @@ setup(
     name='nlpnet',
     description='Neural networks for NLP tasks',
     packages=['nlpnet', 'nlpnet.pos', 'nlpnet.srl', 'nlpnet.parse'],
-    ext_modules=ext_modules(),
+    #ext_modules=ext_modules(),
     scripts=[
         'bin/nlpnet-tag.py',
         'bin/nlpnet-train.py',
@@ -28,11 +28,12 @@ setup(
         'bin/nlpnet-load-embeddings.py'
     ],
     install_requires=[
-        'numpy>=1.9.0',
+        'numpy',
         'nltk>=3.2.2',
         'six>=1.10',
         'h5py>=2.8.0rc1'
     ],
+    setup_requires=['numpy'],
     license='MIT',
     version='1.2.3',
     author='Erick Fonseca',
