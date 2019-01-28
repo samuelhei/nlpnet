@@ -20,7 +20,7 @@ setup(
     name='nlpnet',
     description='Neural networks for NLP tasks',
     packages=['nlpnet', 'nlpnet.pos', 'nlpnet.srl', 'nlpnet.parse'],
-    ext_modules=ext_modules,
+    ext_modules=ext_modules(),
     scripts=[
         'bin/nlpnet-tag.py',
         'bin/nlpnet-train.py',
