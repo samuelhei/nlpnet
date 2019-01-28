@@ -1,12 +1,15 @@
 from setuptools import setup
 from setuptools import Extension
-from distutils.cmd import Command
 
-class CustomBuildExtCommand(Command):
-    def run(self):
-        import numpy
-        self.include_dirs.append(numpy.get_include())
-        build_ext.run(self)
+def ext_modules():
+    import numpy
+
+    # define the extension module
+    cos_module_np = Extension("nlpnet.network",
+                              sources=[".","nlpnet/network.c"],
+
+                              include_dirs=[numpy.get_include()])
+    return [cos_module_np]
 
 def readme():
     with open('README.rst') as f:
@@ -15,15 +18,9 @@ def readme():
 
 setup(
     name='nlpnet',
-    cmdclass = {'build_ext': CustomBuildExtCommand},
     description='Neural networks for NLP tasks',
     packages=['nlpnet', 'nlpnet.pos', 'nlpnet.srl', 'nlpnet.parse'],
-    ext_modules=[
-        Extension(
-            "nlpnet.network",
-            ["nlpnet/network.c"]
-        )
-    ],
+    ext_modules=ext_modules,
     scripts=[
         'bin/nlpnet-tag.py',
         'bin/nlpnet-train.py',
@@ -31,10 +28,10 @@ setup(
         'bin/nlpnet-load-embeddings.py'
     ],
     install_requires=[
-        'numpy>=1.16',
-        'nltk>=3.4',
+        'numpy>=1.9.0',
+        'nltk>=3.2.2',
         'six>=1.10',
-        'h5py>=2.9.0'
+        'h5py>=2.8.0rc1'
     ],
     license='MIT',
     version='1.2.3',
