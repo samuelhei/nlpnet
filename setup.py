@@ -1,4 +1,3 @@
-import numpy as np
 from setuptools import setup
 from setuptools import Extension
 
@@ -15,8 +14,7 @@ setup(
     ext_modules=[
         Extension(
             "nlpnet.network",
-            ["nlpnet/network.c"],
-            include_dirs=['.', np.get_include()]
+            ["nlpnet/network.c"]
         )
     ],
     scripts=[
@@ -25,7 +23,12 @@ setup(
         'bin/nlpnet-test.py',
         'bin/nlpnet-load-embeddings.py'
     ],
-    install_requires=[],
+    install_requires=[
+        'numpy>=1.16',
+        'nltk>=3.4',
+        'six>=1.10',
+        'h5py>=2.9.0'
+    ],
     license='MIT',
     version='1.2.3',
     author='Erick Fonseca',
